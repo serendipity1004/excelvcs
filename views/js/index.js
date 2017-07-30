@@ -5,11 +5,9 @@ let extraArr = JSON.parse(excelCompResult)[0];
 let extraPositionsArr = [];
 let diffPositionsArr = [];
 
-console.log(extraArr);
-
 let container = document.getElementById('example');
 
-// Setup changed data values
+// Setup changed data values for extraArray
 for (let arrIndex in extraArr) {
     let curRow = extraArr[arrIndex];
     let xyPosition = curRow[1].split(":");
@@ -17,13 +15,11 @@ for (let arrIndex in extraArr) {
     let yPosition = xyPosition[0] - 1;
     let addedVal = curRow[2];
 
-    console.log(xyPosition);
-    console.log(addedVal);
-
     data[xPosition][yPosition] = '***' + addedVal + '***';
     extraPositionsArr.push([xPosition, yPosition])
 }
 
+// Setup changed data values for diffArray
 for (let arrIndex in diffArr) {
     let curRow = diffArr[arrIndex];
     let xyPosition = curRow[0].split(":");
@@ -36,6 +32,7 @@ for (let arrIndex in diffArr) {
     diffPositionsArr.push([xPosition, yPosition]);
 }
 
+//Initialize Handsontable with changed data and rendering schemes
 let hot = new Handsontable(container, {
     data: data,
     rowHeaders: true,
@@ -63,6 +60,7 @@ let hot = new Handsontable(container, {
     }
 });
 
+//Rendering scheme for extra arrays
 function extraRowRenderer(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
 
@@ -70,11 +68,10 @@ function extraRowRenderer(instance, td, row, col, prop, value, cellProperties) {
     td.style.backgroundColor = '#F48FB1';
 }
 
+//Rendering scheme for diff arrays
 function diffRowRenderer(instance, td, row, col, prop, value, cellProperties){
     Handsontable.renderers.TextRenderer.apply(this, arguments)
 
     td.style.fontWeight = 'bold';
     td.style.backgroundColor = '#CE93D8';
 }
-
-hot.render();

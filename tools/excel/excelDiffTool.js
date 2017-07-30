@@ -80,6 +80,7 @@ const excelDiffTool = function(){
     });
 };
 
+// Converts input excel position string into number position [x][y]
 const convertExcelPosToNumb = (stringToConvert) => {
     let xAxis = '';
     let yAxis = '';
