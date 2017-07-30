@@ -42,7 +42,7 @@ const excelReadPromise = function(excelFile, path){
             //Run through each worksheet and create a excel sheet array
             excelFile.eachSheet((worksheet, sheetId) => {
 
-                for (let i = 1; i < worksheet.rowCount; i++) {
+                for (let i = 1; i < worksheet.rowCount + 1; i++) {
                     let colArr = [];
                     for (let j = 1; j < worksheet.columnCount + 1; j++) {
                         colArr.push(worksheet.getRow(i).values[j])
